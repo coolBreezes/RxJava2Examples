@@ -14,6 +14,7 @@ import io.reactivex.functions.Consumer;
  * reduce
  * <p>
  * 就是一次用一个方法处理一个值，可以有一个seed作为初始值
+ * 按顺序对数据序列的每一个应用某个函数，然后返回这个值
  * <p>
  * Author: nanchen
  * Email: liushilin520@foxmail.com

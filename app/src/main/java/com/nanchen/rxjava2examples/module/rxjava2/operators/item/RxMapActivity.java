@@ -48,8 +48,29 @@ public class RxMapActivity extends RxOperatorBaseActivity {
         }).subscribe(new Consumer<String>() {
             @Override
             public void accept(@NonNull String s) throws Exception {
-                mRxOperatorsText.append("accept : " + s +"\n");
-                Log.e(TAG, "accept : " + s +"\n" );
+                mRxOperatorsText.append("accept : " + s + "\n");
+                Log.e(TAG, "accept : " + s + "\n");
+            }
+        });
+
+        //test
+        Observable.create(new ObservableOnSubscribe<Integer>() {
+            @Override
+            public void subscribe(@NonNull ObservableEmitter<Integer> e) throws Exception {
+                e.onNext(1);
+                e.onNext(2);
+                e.onNext(3);
+            }
+        }).map(new Function<Integer, Integer>() {
+
+            @Override
+            public Integer apply(@NonNull Integer integer) throws Exception {
+                return integer * 10;
+            }
+        }).subscribe(new Consumer<Integer>() {
+            @Override
+            public void accept(@NonNull Integer integer) throws Exception {
+
             }
         });
     }

@@ -7,6 +7,8 @@ import com.nanchen.rxjava2examples.R;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
@@ -42,7 +44,33 @@ public class RxJustActivity extends RxOperatorBaseActivity {
                     @Override
                     public void accept(@NonNull String s) throws Exception {
                         mRxOperatorsText.append("accept : onNext : " + s + "\n");
-                        Log.e(TAG,"accept : onNext : " + s + "\n" );
+                        Log.e(TAG, "accept : onNext : " + s + "\n");
+                    }
+                });
+
+        //test
+        Observable.just("1", "2", "3")
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<String>() {
+                    @Override
+                    public void accept(@NonNull String s) throws Exception {
+
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(@NonNull Throwable throwable) throws Exception {
+
+                    }
+                }, new Action() {
+                    @Override
+                    public void run() throws Exception {
+
+                    }
+                }, new Consumer<Disposable>() {
+                    @Override
+                    public void accept(@NonNull Disposable disposable) throws Exception {
+
                     }
                 });
     }

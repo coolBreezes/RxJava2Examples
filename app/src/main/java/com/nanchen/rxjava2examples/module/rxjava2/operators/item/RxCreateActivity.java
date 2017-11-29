@@ -84,5 +84,49 @@ public class RxCreateActivity extends RxOperatorBaseActivity {
                 Log.e(TAG, "onComplete" + "\n" );
             }
         });
+
+
+        //自己写
+//1        Observable observable = Observable.create(new ObservableOnSubscribe() {
+//3        Observable.create(new ObservableOnSubscribe() {
+        Observable.create(new ObservableOnSubscribe<Integer>() {
+            @Override
+//2            public void subscribe(@NonNull ObservableEmitter e) throws Exception {
+            public void subscribe(@NonNull ObservableEmitter<Integer> e) throws Exception {
+                e.onNext(1);
+                e.onNext(2);
+                e.onNext(3);
+                e.onNext(4);
+                e.onComplete();
+            }
+        }).subscribe(new Observer<Integer>() {
+
+            private Disposable mDisposable;
+            private int i = 0;
+            @Override
+            public void onSubscribe(@NonNull Disposable d) {
+                mDisposable = d;
+            }
+
+            @Override
+            public void onNext(@NonNull Integer integer) {
+
+                Log.d("TAG","item = " + integer);
+                i++;
+                if (i == 2){
+                    mDisposable.dispose();
+                }
+            }
+
+            @Override
+            public void onError(@NonNull Throwable e) {
+
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
     }
 }

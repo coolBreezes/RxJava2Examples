@@ -30,6 +30,10 @@ public class RxWindowActivity extends RxOperatorBaseActivity {
         return getString(R.string.rx_window);
     }
 
+    /**
+     * 为什么会自增
+     */
+
     @Override
     protected void doSomething() {
         mRxOperatorsText.append("window\n");
